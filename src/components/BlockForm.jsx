@@ -4,9 +4,12 @@ import { getList } from '../store/BlockTransactions/BlockTransactionsSlice';
 import { getData } from '../store/BlockInfo/BlockInfoSlice';
 import { useDispatch } from 'react-redux';
 
+const DEFAULT_BLOCK_HASH =
+    '00000000000000000007878ec04bb2b2e12317804810f4c26033585b3f81ffaa';
+
 const BlockForm = () => {
     const dispatch = useDispatch();
-    const [currentBlock, setCurrentBlock] = useState('');
+    const [currentBlock, setCurrentBlock] = useState(DEFAULT_BLOCK_HASH);
 
     const handleCurrentBlockChange = (e) => setCurrentBlock(e.target.value);
 
