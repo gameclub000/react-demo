@@ -52,34 +52,35 @@ const BlockTransactions = () => {
                                     ))}
                                 </ul>
                                 <DoubleRightOutlined />
-                                <ul style={{ width: '30vw' }}>
+                                <ul style={{ width: '40vw' }}>
                                     {record?.out?.map((item) => (
                                         <li key={item.script}>
-                                            {item.spent
-                                                ? AddressLink(item?.addr)
-                                                : 'OP_RETURN'}
+                                            <Space>
+                                                <div>
+                                                    {item.spent
+                                                        ? AddressLink(
+                                                              item?.addr
+                                                          )
+                                                        : 'OP_RETURN'}
+                                                </div>
+                                                <div>
+                                                    {item.value / 100000000} BTC
+                                                </div>
+                                            </Space>
                                         </li>
                                     ))}
                                 </ul>
                             </Space>
                         </div>
-                        <div>Fee: {record?.fee}</div>
+                        <div>Fee: {record?.fee / 100000000} BTC</div>
+                        <div>
+                            {moment(record?.time * 1000).format(
+                                'YYYY-MM-DD HH:mm:ss'
+                            )}
+                        </div>
                     </div>
                 );
             }
-        },
-        {
-            title: 'Weight',
-            dataIndex: 'weight',
-            key: 'weight',
-            render: (weight) => <>{weight} WU</>
-        },
-        {
-            title: 'time',
-            dataIndex: 'time',
-            render: (time) => (
-                <>{moment(time * 1000).format('YYYY-MM-DD HH:mm:ss')}</>
-            )
         }
     ];
 
