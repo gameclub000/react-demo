@@ -1,4 +1,4 @@
-import provider, {
+import response, {
     handleProviderSuccess,
     handleProviderError
 } from './getBlockTransactions';
@@ -10,28 +10,22 @@ describe('API getBlockTransactions', () => {
     it('should pass this canary test', () => expect(true).toBe(true));
 
     it('shoud handleProviderSuccess handle response', () => {
+        const page = 1;
+        const size = 2;
+        const blockHash = 'xxx';
         const response = {
             data: {
-                code: 0,
-                data: 'ok'
+                tx: [0, 1, 2, 3, 4, 5, 6]
             }
         };
-        const result = handleProviderSuccess(response);
-        expect(result).toEqual(response.data);
-    });
-
-    it('shoud handleProviderSuccess call notification.error when data invalid', () => {
-        const notification = {
-            error: jest.fn()
-        };
-        const response = {
-            data: {
-                code: -1,
-                data: 'ok'
-            }
-        };
-        handleProviderSuccess(response, notification);
-        expect(notification.error).toBeCalled();
+        const result = handleProviderSuccess(response, page, size, blockHash);
+        expect(result).toEqual({
+            page,
+            size,
+            total: 7,
+            hash: blockHash,
+            list: [0, 1]
+        });
     });
 
     it('shoud handleProviderError call notification.error', () => {
@@ -43,15 +37,23 @@ describe('API getBlockTransactions', () => {
     });
 
     it('should call handleProviderSuccess with response after axios response result', async () => {
+        const page = 1;
+        const size = 2;
+        const blockHash = 'xxx';
         const result = {
             data: {
-                code: 0,
-                data: 'ok'
+                tx: [0, 1, 2, 3, 4, 5, 6]
             }
         };
         axios.get.mockResolvedValue(result);
-        return provider('blockHash').then((res) => {
-            expect(res).toEqual(result.data);
+        return response(page, size, blockHash).then((res) => {
+            expect(res).toEqual({
+                page,
+                size,
+                total: 7,
+                hash: blockHash,
+                list: [0, 1]
+            });
         });
     });
 });

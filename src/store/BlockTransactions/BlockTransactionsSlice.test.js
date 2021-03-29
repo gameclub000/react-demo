@@ -43,11 +43,9 @@ describe('BlockTransactionsSlice', () => {
         const action = {
             type: getList.fulfilled.type,
             payload: {
-                data: {
-                    list: data,
-                    page: 0,
-                    total: 100
-                }
+                list: data,
+                page: 0,
+                total: 100
             }
         };
 

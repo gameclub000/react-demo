@@ -1,14 +1,10 @@
 import { message } from 'antd';
 import axios from 'axios';
 
-export const handleProviderSuccess = (res, notification = message) => {
-    let result = {};
-    if (res.data?.code === 0) {
-        result = res.data?.data;
-    } else {
-        notification.error('System Error, Please try again!');
-    }
-    return result;
+export const handleProviderSuccess = (response) => {
+    const info = response?.data || {};
+    info.tx = [];
+    return info;
 };
 
 export const handleProviderError = (error, notification = message) => {
@@ -16,9 +12,12 @@ export const handleProviderError = (error, notification = message) => {
     return error;
 };
 
-const provider = (blockHash) =>
-    axios
-        .get(`/api/blockInfo/${blockHash}`)
+const provider = (blockHash) => {
+    return axios.get(`https://blockchain.info/rawblock/${blockHash}`);
+};
+
+const response = (blockHash) =>
+    provider(blockHash)
         .then((res) => {
             return handleProviderSuccess(res);
         })
@@ -26,4 +25,4 @@ const provider = (blockHash) =>
             return handleProviderError(error);
         });
 
-export default provider;
+export default response;

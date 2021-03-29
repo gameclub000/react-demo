@@ -51,7 +51,7 @@ const slice = createSlice({
         [getList.fulfilled]: (state, action) => {
             state.status = STATUS_FULFILLED;
             const { list = [], page = 1, total = 0, hash = '' } =
-                action.payload?.data || {};
+                action.payload || {};
             state.list = list;
             state.page = page;
             state.total = total;

@@ -12,26 +12,11 @@ describe('API getBlockInfo', () => {
     it('shoud handleProviderSuccess handle response', () => {
         const response = {
             data: {
-                code: 0,
-                data: 'ok'
+                tx: []
             }
         };
         const result = handleProviderSuccess(response);
-        expect(result).toEqual('ok');
-    });
-
-    it('shoud handleProviderSuccess call notification.error when data invalid', () => {
-        const notification = {
-            error: jest.fn()
-        };
-        const response = {
-            data: {
-                code: -1,
-                data: 'ok'
-            }
-        };
-        handleProviderSuccess(response, notification);
-        expect(notification.error).toBeCalled();
+        expect(result).toEqual(response.data);
     });
 
     it('shoud handleProviderError call notification.error', () => {
@@ -43,15 +28,14 @@ describe('API getBlockInfo', () => {
     });
 
     it('should call handleProviderSuccess with response after axios response result', async () => {
-        const result = {
+        const response = {
             data: {
-                code: 0,
-                data: 'ok'
+                tx: []
             }
         };
-        axios.get.mockResolvedValue(result);
+        axios.get.mockResolvedValue(response.data);
         return provider('blockHash').then((res) => {
-            expect(res).toEqual('ok');
+            expect(res).toEqual(response.data);
         });
     });
 });
