@@ -2,8 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), it's a simple demo purpose [Blocklet](https://www.arcblock.io/en/blocklets) that show Block Infomation and Transactions.
 
-## Install on my ABT Node
+## Preview
 
+1. Install and set up ABT Wallet
+Install [ABT Wallet](https://abtwallet.io/) for iOS or Android at ABT Wallet. Then, open up the app and follow the directions in the app to set up your wallet.
+
+2. Open [Demo](http://45.77.171.187:8089/blocklets) Link and follow the directions in the Website.
+
+<img width="1245" alt="Screen Shot" src="https://user-images.githubusercontent.com/53006892/112926199-ad3a9280-9145-11eb-8960-031f7518384d.png">
 
 
 ## Run and debug in the cloud with Gitpod
@@ -34,6 +40,9 @@ npm run deploy
 ```
 
 ## Test
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ```shell
 npm run test
