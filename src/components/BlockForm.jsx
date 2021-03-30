@@ -4,7 +4,7 @@ import { getList } from '../store/BlockTransactions/BlockTransactionsSlice';
 import { getData } from '../store/BlockInfo/BlockInfoSlice';
 import { useDispatch } from 'react-redux';
 
-const DEFAULT_BLOCK_HASH =
+export const DEFAULT_BLOCK_HASH =
     '00000000000000000007878ec04bb2b2e12317804810f4c26033585b3f81ffaa';
 
 const BlockForm = () => {
@@ -15,13 +15,13 @@ const BlockForm = () => {
 
     const handleSubmit = () => {
         dispatch(
-            getList({
-                page: 1,
-                currentBlock
+            getData({
+                currentBlock: DEFAULT_BLOCK_HASH
             })
         );
         dispatch(
-            getData({
+            getList({
+                page: 1,
                 currentBlock
             })
         );
@@ -29,13 +29,12 @@ const BlockForm = () => {
 
     return (
         <Card>
-            <Form onSubmitCapture={handleSubmit}>
-                <Form.Item>
-                    <Input
-                        value={currentBlock}
-                        onChange={handleCurrentBlockChange}
-                    />
-                </Form.Item>
+            <Form title="form" onSubmitCapture={handleSubmit}>
+                <Input
+                    title="input"
+                    value={currentBlock}
+                    onChange={handleCurrentBlockChange}
+                />
                 <Button htmlType="submit" type="primary">
                     Search
                 </Button>

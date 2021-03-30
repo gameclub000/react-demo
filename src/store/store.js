@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import BlockTransactionsReducer from '../store/BlockTransactions/BlockTransactionsSlice';
-import BlockInfoReducer from '../store/BlockInfo/BlockInfoSlice';
+import BlockTransactionsReducer from './BlockTransactions/BlockTransactionsSlice';
+import BlockInfoReducer from './BlockInfo/BlockInfoSlice';
 
 export default configureStore({
     reducer: {
